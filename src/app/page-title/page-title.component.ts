@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-page-title',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './page-title.component.css'
 })
 export class PageTitleComponent {
-
+  
 }
