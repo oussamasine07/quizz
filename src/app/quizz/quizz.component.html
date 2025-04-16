@@ -1,2 +1,22 @@
 <app-page-title [pageTitle]="pageTitle" />
 
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+    <select name="difficulty" [(ngModel)]="quizzDetails.difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Meduim</option>
+        <option value="hard">Hard</option>
+    </select>
+
+    <select name="type" [(ngModel)]="quizzDetails.type">
+        <option value="">any</option>
+        <option value="multiple">Multiple</option>
+        <option value="boolean">True or False</option>
+    </select>
+
+    <label for="history" >history</label>
+    <input type="radio" name="category" [(ngModel)]="quizzDetails.category" value="9">
+    <label for="geography">Geography</label>
+    <input type="radio" name="category" [(ngModel)]="quizzDetails.category" value="10">
+    <br>
+    <button type="submit">next</button>
+</form>
