@@ -13,6 +13,8 @@ import { FormsModule, NgForm } from "@angular/forms";
 export class SignUpComponent {
   title = signal("Welcome to QUIZIZZ")
 
+  pageTitle = "Welcome to QUIZIZZ";
+
   userObj = {
     username: ""
   }
