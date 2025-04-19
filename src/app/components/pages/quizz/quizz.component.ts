@@ -32,11 +32,13 @@ export class QuizzComponent {
 
     this.questions = await getQuizzQuestions(this.quizzDetails);
 
+    console.log(this.questions)
+    
     this.quizzDetails = {
       category: "",
       difficulty: "",
       type: ""
     }
   }
-  
+
 }

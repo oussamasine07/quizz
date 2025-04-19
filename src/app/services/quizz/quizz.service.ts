@@ -19,6 +19,7 @@ export class QuizzService {
     // prepare ths link
     const link = `https://opentdb.com/api.php?amount=10&category=${ category }&difficulty=${difficulty}&type=${type}`;
 
+    
     const res = await fetch(link);
     const { results } = await res.json();
     

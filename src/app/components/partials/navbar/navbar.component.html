@@ -1,0 +1,29 @@
+<nav class="bg-[#F67563] text-white px-6 py-4 flex items-center justify-between">
+    <!-- Left: Logo -->
+    <div class="text-2xl font-bold tracking-wide">
+        QUIZZIZ
+    </div>
+
+    <!-- Middle: Navigation Links -->
+    <ul class="hidden md:flex gap-8 text-white font-medium">
+        <li><a href="#" class="hover:text-yellow-200 transition">Home</a></li>
+        <li><a href="#" class="hover:text-yellow-200 transition">Quizzes</a></li>
+        <li><a href="#" class="hover:text-yellow-200 transition">About</a></li>
+    </ul>
+
+    <!-- Right: Dropdown -->
+    <div class="relative group">
+        <button class="flex items-center gap-2 font-medium hover:text-yellow-200 transition">
+            More
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                <path d="M5.5 7l4.5 4.5L14.5 7" />
+            </svg>
+        </button>
+        <ul
+            class="absolute right-0 mt-2 w-40 bg-white text-[#080715] rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transform translate-y-2 transition-all duration-200 z-50">
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Profile</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Settings</a></li>
+            <li><a href="#" class="block px-4 py-2 hover:bg-gray-100">Logout</a></li>
+        </ul>
+    </div>
+</nav>

@@ -1,4 +1,4 @@
-.app-wrapper {
+/* .app-wrapper {
     display: flex;
     align-items: center;
     width: 100%;
@@ -9,4 +9,10 @@
     
     height: 100%;
     width: 100%;
+} */
+
+.container {
+    width: 90%;
+    height: 90vh;
+    margin: 0 auto;
 }
