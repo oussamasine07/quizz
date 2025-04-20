@@ -5,6 +5,7 @@ import { QuizzService } from '../../../services/quizz/quizz.service';
 import { NgFor } from '@angular/common';
 import { RequestQuestionsService } from '../../../services/request-questions/request-questions.service';
 import { QuestionComponent } from '../question/question.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-quizz',
@@ -18,7 +19,7 @@ import { QuestionComponent } from '../question/question.component';
 })
 export class QuizzComponent {
   
-  // user: any = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : "";
+  
   title = signal("this is quizz");
   pageTitle ="Welcome test page";
 
@@ -70,6 +71,12 @@ export class QuizzComponent {
 
   requestQuestions: RequestQuestionsService = inject(RequestQuestionsService);
 
+  getUserFromLocalStorage = localStorage.getItem("user");
+
+  user = this.getUserFromLocalStorage ? JSON.parse(this.getUserFromLocalStorage) : null;
+  
+  route = inject(Router)
+
   onSubmit ( form: NgForm ) {
 
     // const { getQuizzQuestions } = this.quizzService;
@@ -78,6 +85,13 @@ export class QuizzComponent {
       next: (val: any) => {
         // this.questions = val.results
         this.requestQuestions.getQuestions.next(val.results)
+        this.user.currentQuize = {
+          title: val.results[0].category,
+          questions: val.results,
+          score: 0
+        };
+        localStorage.setItem("user", JSON.stringify(this.user))
+        this.route.navigate(["question"])
       }
     })
     
