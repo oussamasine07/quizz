@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { PageTitleComponent } from '../../partials/page-title/page-title.component';
 import { AnswerLabelComponent } from '../../partials/answer-label/answer-label.component';
 import { NgFor } from '@angular/common';
+import { CurrentQuestionService } from '../../../services/current-question/current-question.service';
 
 @Component({
   selector: 'app-question',
@@ -16,34 +17,44 @@ import { NgFor } from '@angular/common';
 })
 export class QuestionComponent implements OnInit {
 
-  requestQuestions = inject(RequestQuestionsService);
+  requestQuestionsService = inject(RequestQuestionsService);
+  currentQuestionService = inject(CurrentQuestionService)
   route = inject(Router);
 
-  pageTitle ="question page";
+  pageTitle = "question page";
+
+  
+  getUserFromLocalStorage = localStorage.getItem("user");
+  user = this.getUserFromLocalStorage ? JSON.parse(this.getUserFromLocalStorage) : [];
 
   currentQuestionIdx = 0;
-  currentQuestion = null;
+  currentQuestion = this.user.currentQuize.questions[this.currentQuestionIdx]
+  answers = [this.currentQuestion.correct_answer, ...this.currentQuestion.incorrect_answers]
+  // shuffel answers
+  shuffeledAnswers = this.currentQuestionService.onShuffelAnswers(this.answers); 
+
 
   ngOnInit(): void {
-    const getUserFromLocalStorage = localStorage.getItem("user");
-    const user = getUserFromLocalStorage ? JSON.parse(getUserFromLocalStorage) : [];
+    // const getUserFromLocalStorage = localStorage.getItem("user");
+    // const user = getUserFromLocalStorage ? JSON.parse(getUserFromLocalStorage) : [];
 
-    if (user == null ) {
+    if (this.user == null ) {
       this.route.navigate([""])
     } else {
-      if ( user.currentQuize == null ) {
+      if ( this.user.currentQuize == null ) {
         this.route.navigate(["quizz"])
       }
     }
     
-    this.requestQuestions.getQuestions.subscribe({
+    this.requestQuestionsService.getQuestions.subscribe({
       next: (questions) => {
         console.log("getting questions from Question components")
         console.log(questions)
       }
     })
 
-    console.log(user.currentQuize.questions)
+    console.log(this.shuffeledAnswers)
+
 
   }
 
