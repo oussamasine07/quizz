@@ -23,7 +23,7 @@ export class RequestQuestionsService {
     difficulty = difficulty != "" ? `&difficulty=${ difficulty }` : '';
     type = type != "" ? `&type=${ type }` : '';
     // prepare link
-    const url = `https://opentdb.com/api.php?amount=10${ category }${ difficulty }${ type }`;
+    const url = `https://opentdb.com/api.php?amount=3${ category }${ difficulty }${ type }`;
 
     return this.http.get(url)
 

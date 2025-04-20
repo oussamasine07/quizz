@@ -1,4 +1,17 @@
-<label class="flex items-center gap-3 p-3 rounded-lg border border-gray-300 hover:border-blue-400 cursor-pointer mb-2">
+<!-- <label class="flex items-center gap-3 p-3 rounded-lg border border-gray-300 hover:border-blue-400 cursor-pointer mb-2">
     <input type="radio" name="answer" value="{{ answer() }}" class="accent-blue-500">
     <span> {{ answer() }} </span>
+</label> -->
+
+
+<label class="flex items-center gap-3 p-3 rounded-lg border border-gray-300 hover:border-blue-400 cursor-pointer mb-2">
+    <input
+        type="radio"
+        name="answer"
+        [value]="answer()"
+        ngModel
+        required
+        class="accent-blue-500"
+    >
+  <span>{{ answer() }}</span>
 </label>

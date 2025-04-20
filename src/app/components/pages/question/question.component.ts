@@ -5,11 +5,12 @@ import { PageTitleComponent } from '../../partials/page-title/page-title.compone
 import { AnswerLabelComponent } from '../../partials/answer-label/answer-label.component';
 import { NgFor } from '@angular/common';
 import { CurrentQuestionService } from '../../../services/current-question/current-question.service';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-question',
   imports: [ 
-    NgFor,
+    NgFor, FormsModule,
     PageTitleComponent, AnswerLabelComponent 
   ],
   templateUrl: './question.component.html',
@@ -32,7 +33,7 @@ export class QuestionComponent implements OnInit {
   answers = [this.currentQuestion.correct_answer, ...this.currentQuestion.incorrect_answers]
   // shuffel answers
   shuffeledAnswers = this.currentQuestionService.onShuffelAnswers(this.answers); 
-
+  score = 0
 
   ngOnInit(): void {
     // const getUserFromLocalStorage = localStorage.getItem("user");
@@ -53,11 +54,54 @@ export class QuestionComponent implements OnInit {
       }
     })
 
-    console.log(this.shuffeledAnswers)
-
+    this.currentQuestionService.currentQuestion.subscribe({
+      next: (question) => {
+        this.currentQuestion = question
+        this.answers = [this.currentQuestion.correct_answer, ...this.currentQuestion.incorrect_answers]
+        // shuffel answers
+        this.shuffeledAnswers = this.currentQuestionService.onShuffelAnswers(this.answers);
+      }
+    })
 
   }
 
+  selectedAnswer = "";
+  onSubmit (form: FormsModule) {
+
+    // select an answer
+    if (this.currentQuestion.correct_answer == this.selectedAnswer) this.score++
+
+    this.currentQuestionIdx++
+
+    const idx = this.currentQuestionIdx < this.user.currentQuize.questions.length ? this.currentQuestionIdx : this.user.currentQuize.questions.length - 1;
+    this.currentQuestionService.onSetCurrentQuestion(this.user.currentQuize.questions[idx])
+  
+    if (this.currentQuestionIdx === this.user.currentQuize.questions.length ) {
+      console.log(this.score)
+      console.log("done")
+
+      // set this quizz to history
+      const history = {
+        quizz: this.user.currentQuize.questions,
+        score: this.score
+      }
+
+      this.user.quizzesHistory.push(history);
+      
+      // clear current quizz
+      this.user.currentQuize = null;
+
+      localStorage.setItem("user", JSON.stringify(this.user))
+
+      // redirect to choose quizz
+      this.route.navigate(["quizz"])
+    }
+
+    
+    
+    
+
+  }
   
   // select question
   // suffule answers
