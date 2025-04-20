@@ -4,10 +4,14 @@ import { PageTitleComponent } from '../../partials/page-title/page-title.compone
 import { QuizzService } from '../../../services/quizz/quizz.service';
 import { NgFor } from '@angular/common';
 import { RequestQuestionsService } from '../../../services/request-questions/request-questions.service';
+import { QuestionComponent } from '../question/question.component';
 
 @Component({
   selector: 'app-quizz',
-  imports: [ PageTitleComponent, FormsModule, NgFor ],
+  imports: [ 
+    PageTitleComponent, QuestionComponent,
+    FormsModule, NgFor 
+  ],
   templateUrl: './quizz.component.html',
   styleUrl: './quizz.component.css',
   standalone: true
@@ -72,11 +76,10 @@ export class QuizzComponent {
 
     this.requestQuestions.getQuizzQuestions(this.quizzDetails).subscribe({
       next: (val: any) => {
-        this.questions = val.results
+        // this.questions = val.results
+        this.requestQuestions.getQuestions.next(val.results)
       }
     })
-
-    console.log(this.questions)
     
     this.quizzDetails = {
       category: "",

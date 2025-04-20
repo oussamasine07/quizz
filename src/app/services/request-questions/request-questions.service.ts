@@ -15,6 +15,8 @@ export class RequestQuestionsService {
 
   constructor( private http: HttpClient ) { }
 
+  getQuestions = new Subject();
+
   getQuizzQuestions ({category, difficulty, type}: ObjType) {
 
     category = category != "" ? `&category=${ category }` : '';
