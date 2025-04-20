@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
-import { PageTitleComponent } from '../page-title/page-title.component';
-import { SignUpService } from '../services/signup/sign-up.service';
 import { FormsModule, NgForm } from "@angular/forms";
+import { PageTitleComponent } from '../../partials/page-title/page-title.component';
 
 @Component({
   selector: 'app-sign-up',

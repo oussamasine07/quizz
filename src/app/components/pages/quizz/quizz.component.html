@@ -1,22 +1,67 @@
 <app-page-title [pageTitle]="pageTitle" />
 
-<form #form="ngForm" (ngSubmit)="onSubmit(form)">
-    <select name="difficulty" [(ngModel)]="quizzDetails.difficulty">
-        <option value="easy">Easy</option>
-        <option value="medium">Meduim</option>
-        <option value="hard">Hard</option>
-    </select>
+<div class="form-wrapper h-2/3 flex justify-center items-center">
+    <form class="max-w-sm mx-auto p-5 bg-[#F7D082] rounded-2xl w-2/5" #form="ngForm" (ngSubmit)="onSubmit(form)">
 
-    <select name="type" [(ngModel)]="quizzDetails.type">
-        <option value="">any</option>
-        <option value="multiple">Multiple</option>
-        <option value="boolean">True or False</option>
-    </select>
+        <div class="w-full max-w-xs mx-auto">
+            <label for="category" class="block mb-2 text-sm font-medium text-gray-700">Choose a category</label>
+            <div class="relative">
+                <select id="category" name="category"
+                    class="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none" [(ngModel)]="quizzDetails.category">
+                    <option value="">Any</option>
+                    <option *ngFor="let category of categories" value="{{ category.id }}"> {{ category.name }} </option>
+                </select>
 
-    <label for="history" >history</label>
-    <input type="radio" name="category" [(ngModel)]="quizzDetails.category" value="9">
-    <label for="geography">Geography</label>
-    <input type="radio" name="category" [(ngModel)]="quizzDetails.category" value="10">
-    <br>
-    <button type="submit">next</button>
-</form>
+                <!-- Down arrow icon -->
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-xs mx-auto">
+            <label class="block mb-2 text-sm font-medium text-gray-700">Difficulty</label>
+            <div class="relative">
+                <select id="category" class="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none" name="difficulty" [(ngModel)]="quizzDetails.difficulty">
+                    <option value="" >Any Difficulty</option>
+                    <option value="easy" >Easy</option>
+                    <option value="medium">Meduim</option>
+                    <option value="hard">Hard</option>
+                </select>
+
+                <!-- Down arrow icon -->
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-full max-w-xs mx-auto">
+            <label class="block mb-2 text-sm font-medium text-gray-700">type</label>
+            <div class="relative">
+                <select class="block w-full px-4 py-2 text-sm text-gray-700 bg-white border border-gray-300 rounded-2xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none" name="type" [(ngModel)]="quizzDetails.type">
+                    <option value="">any</option>
+                    <option value="multiple">Multiple</option>
+                    <option value="boolean">True or False</option>
+                </select>
+
+                <!-- Down arrow icon -->
+                <div class="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    
+
+        <button type="submit" class="text-[#080715]  bg-[#F67563] hover:bg-[#e4341c] capitalize focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none mt-2 w-full">Start Quizz</button>
+    </form>
+</div>
